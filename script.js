@@ -4,7 +4,7 @@ var len = 0;
 var count = 0;
 var level = 0;
 var wrong = new Audio("sound/wrong.mp3");
-var sound = ["blue", "red", "green", "yellow"]
+var sound = ["blue", "red", "green", "yellow"];
 var best = 0;
 var audio = true;
 
@@ -21,7 +21,7 @@ function new_game() {
   level = 0;
   count = 0;
   len = 0;
-  $("h1")[0].innerText = "Game Over, press any key or tap anywhere";
+  $("#prompt").text("Game Over, press Start to play again");
   wrong.play();
   game_on = false;
 }
@@ -40,10 +40,10 @@ function next() {
     len = level;
     if (best < level) {
       best = level;
-      $("h1")[1].innerText = "Best Score: " + best;
+      $("#bestScore").text("Best Score: " + best);
     }
     clicked(temp, 300, "new_pressed");
-    $("h1")[0].innerText = "Level " + level;
+    $("#prompt").text("Level " + level);
   }, 500);
 }
 
@@ -65,14 +65,7 @@ $(".box").on("click touchstart", function () {
   handleBoxClick(this.id[1]);
 });
 
-$(document).on("keydown", function () {
-  if (!game_on) {
-    next();
-    game_on = true;
-  }
-});
-
-$(document).on("touchstart", function () {
+$("#startButton").on("click touchstart", function () {
   if (!game_on) {
     next();
     game_on = true;
