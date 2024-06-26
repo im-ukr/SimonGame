@@ -4,7 +4,7 @@ var len = 0;
 var count = 0;
 var level = 0;
 var wrong = new Audio("sound/wrong.mp3");
-var sound = ["blue", "red", "green", "yellow"];
+var sound = ["blue", "red", "green", "yellow"]
 var best = 0;
 var audio = true;
 
@@ -21,15 +21,15 @@ function new_game() {
   level = 0;
   count = 0;
   len = 0;
-  $("#prompt").text("Game Over, press Start to play again");
-  wrong.play();
-  game_on = false;
+  $("h1")[0].innerText = "Game Over, press any key";
+  wrong.play()
+  game_on = false
 }
 
 function random_audio(flag) {
-  if (flag) {
-    new Audio("sound/" + sound[Math.floor((Math.random() * 4))] + ".mp3").play();
-  }
+  if (flag){
+  new Audio("sound/" + sound[Math.floor((Math.random() * 4))] + ".mp3").play();
+}
 }
 
 function next() {
@@ -39,17 +39,18 @@ function next() {
     level++;
     len = level;
     if (best < level) {
+      $("h1")[1].innerText = "Best Score: " + best;
       best = level;
-      $("#bestScore").text("Best Score: " + best);
     }
     clicked(temp, 300, "new_pressed");
-    $("#prompt").text("Level " + level);
+    $("h1")[0].innerText = "Level " + level;
   }, 500);
 }
 
-function handleBoxClick(id) {
-  clicked(id, 150, "pressed");
-  if (id == seq[count]) {
+
+$(".box").click(function () {
+  clicked(this["id"][1], 150, "pressed");
+  if (this["id"][1] == seq[count]) {
     if (count == (seq.length - 1)) {
       count = 0;
       next();
@@ -59,15 +60,15 @@ function handleBoxClick(id) {
   } else {
     new_game();
   }
-}
-
-$(".box").on("click touchstart", function () {
-  handleBoxClick(this.id[1]);
 });
 
-$("#startButton").on("click touchstart", function () {
-  if (!game_on) {
+
+
+$(document).keydown(function () {
+  if (game_on == false) {
     next();
     game_on = true;
   }
 });
+
+
