@@ -47,20 +47,17 @@ function next() {
     clicked(temp, 300, "new_pressed");
     $("h1")[0].innerText = "Level " + level;
     debounce = false;
-  }, 500);
+  }, 1000);
 }
 
 function handleBoxPress(btn) {
   if (debounce) return;
-  debounce = true;
   clicked(btn, 150, "pressed");
   if (btn == seq[count]) {
-    if (count == (seq.length - 1)) {
+    count++;
+    if (count === seq.length) {
       count = 0;
-      next();
-    } else {
-      count++;
-      debounce = false;
+      setTimeout(next, 1000);
     }
   } else {
     new_game();
@@ -68,7 +65,9 @@ function handleBoxPress(btn) {
 }
 
 $(".box").on("click touchstart", function () {
-  handleBoxPress(this.id[1]);
+  if (!debounce) {
+    handleBoxPress(this.id[1]);
+  }
 });
 
 $(document).on("keydown touchstart", function () {
