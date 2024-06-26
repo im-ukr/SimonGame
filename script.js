@@ -21,7 +21,7 @@ function new_game() {
   level = 0;
   count = 0;
   len = 0;
-  $("h1")[0].innerText = "Game Over, press any key";
+  $("h1")[0].innerText = "Game Over, press any key or tap anywhere";
   wrong.play();
   game_on = false;
 }
@@ -65,7 +65,14 @@ $(".box").on("click touchstart", function () {
   handleBoxClick(this.id[1]);
 });
 
-$(document).on("keydown touchstart", function () {
+$(document).on("keydown", function () {
+  if (!game_on) {
+    next();
+    game_on = true;
+  }
+});
+
+$(document).on("touchstart", function () {
   if (!game_on) {
     next();
     game_on = true;
