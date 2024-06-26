@@ -49,4 +49,19 @@
   justify-content: center;
 }
 
+@media (max-width: 600px) {
+  .box {
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+  }
 
+  .mute {
+    width: 30px;
+    height: 30px;
+  }
+
+  #promt {
+    font-size: 1.5rem;
+  }
+}
