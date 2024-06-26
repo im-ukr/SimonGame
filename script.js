@@ -7,6 +7,7 @@ var wrong = new Audio("sound/wrong.mp3");
 var sound = ["blue", "red", "green", "yellow"];
 var best = 0;
 var audio = true;
+var debounce = false;
 
 function clicked(btn, duration, class_name) {
   $("#b" + btn).addClass(class_name);
@@ -33,6 +34,7 @@ function random_audio(flag) {
 }
 
 function next() {
+  debounce = true;
   setTimeout(function () {
     var temp = Math.floor((Math.random() * 9) + 1);
     seq.push(temp);
@@ -44,10 +46,13 @@ function next() {
     }
     clicked(temp, 300, "new_pressed");
     $("h1")[0].innerText = "Level " + level;
+    debounce = false;
   }, 500);
 }
 
 function handleBoxPress(btn) {
+  if (debounce) return;
+  debounce = true;
   clicked(btn, 150, "pressed");
   if (btn == seq[count]) {
     if (count == (seq.length - 1)) {
@@ -55,6 +60,7 @@ function handleBoxPress(btn) {
       next();
     } else {
       count++;
+      debounce = false;
     }
   } else {
     new_game();
@@ -66,7 +72,7 @@ $(".box").on("click touchstart", function () {
 });
 
 $(document).on("keydown touchstart", function () {
-  if (!game_on) {
+  if (!game_on && !debounce) {
     next();
     game_on = true;
   }
