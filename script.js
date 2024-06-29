@@ -22,14 +22,14 @@ function new_game() {
   count = 0;
   len = 0;
   $("h1")[0].innerText = "Game Over, press any key";
-  wrong.play()
-  game_on = false
+  wrong.play();
+  game_on = false;
 }
 
 function random_audio(flag) {
   if (flag){
-  new Audio("sound/" + sound[Math.floor((Math.random() * 4))] + ".mp3").play();
-}
+    new Audio("sound/" + sound[Math.floor((Math.random() * 4))] + ".mp3").play();
+  }
 }
 
 function next() {
@@ -47,10 +47,9 @@ function next() {
   }, 500);
 }
 
-
-$(".box").click(function () {
-  clicked(this["id"][1], 150, "pressed");
-  if (this["id"][1] == seq[count]) {
+function handleBoxClick(id) {
+  clicked(id[1], 150, "pressed");
+  if (id[1] == seq[count]) {
     if (count == (seq.length - 1)) {
       count = 0;
       next();
@@ -60,14 +59,15 @@ $(".box").click(function () {
   } else {
     new_game();
   }
+}
+
+$(".box").on("click touchstart", function () {
+  handleBoxClick(this["id"]);
 });
 
-
-
-$(document).keydown(function () {
+$(document).on("keydown touchstart", function () {
   if (game_on == false) {
     next();
     game_on = true;
   }
 });
-
