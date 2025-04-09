@@ -4,7 +4,7 @@ var len = 0;
 var count = 0;
 var level = 0;
 var wrong = new Audio("sound/wrong.mp3");
-var sound = ["blue", "red", "green", "yellow"]
+var sound = ["blue", "red", "green", "yellow"];
 var best = 0;
 var audio = true;
 
@@ -27,14 +27,14 @@ function new_game() {
 }
 
 function random_audio(flag) {
-  if (flag){
-    new Audio("sound/" + sound[Math.floor((Math.random() * 4))] + ".mp3").play();
+  if (flag) {
+    new Audio("sound/" + sound[Math.floor(Math.random() * 4)] + ".mp3").play();
   }
 }
 
 function next() {
   setTimeout(function () {
-    var temp = Math.floor((Math.random() * 9) + 1);
+    var temp = Math.floor(Math.random() * 9 + 1);
     seq.push(temp);
     level++;
     len = level;
@@ -50,7 +50,7 @@ function next() {
 function handleBoxClick(id) {
   clicked(id[1], 150, "pressed");
   if (id[1] == seq[count]) {
-    if (count == (seq.length - 1)) {
+    if (count == seq.length - 1) {
       count = 0;
       next();
     } else {
@@ -62,11 +62,11 @@ function handleBoxClick(id) {
 }
 
 $(".box").on("click touchstart", function () {
-  handleBoxClick(this["id"]);
+  handleBoxClick(this.id);
 });
 
 $(document).on("keydown touchstart", function () {
-  if (game_on == false) {
+  if (!game_on) {
     next();
     game_on = true;
   }
