@@ -49,7 +49,6 @@
   justify-content: center;
 }
 
-/* Responsive design */
 @media (max-width: 600px) {
   .box {
     height: 100px;

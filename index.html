@@ -10,7 +10,7 @@
 </head>
 
 <body class="main text-center">
-    <h1 style="font-size: 2.5rem;" id="promt">Press any Key</h1>
+    <h1 style="font-size: 2.5rem; font-family: 'Press Start 2P', cursive;" id="promt">Press or Tap any Key to Start</h1>
 
     <div class="container">
         <div class="row cen">
@@ -30,11 +30,27 @@
         </div>
     </div>
 
-    <h1 style="font-size: 2.5rem;" id="promt">Best Score: 0</h1>
-    <!-- Hidden by default; shown after game over -->
-    <button id="tryAgain" style="display: none;">Try Again</button>
+    <h1 style="font-size: 2.5rem; font-family: 'Press Start 2P', cursive;" id="promt">Best Score: 0</h1>
 
-    <p style="margin-top: 1rem;">Follow and tap the sequence of boxes as shown.</p>
+    <div id="tryAgainModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: #0A2647; color: lightblue; font-family: 'Press Start 2P', cursive;">
+                <div class="modal-header">
+                    <h5 class="modal-title">Game Over!</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Your score was <span id="finalScore">0</span>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="tryAgainButton" class="btn btn-primary" style="font-family: 'Press Start 2P', cursive;">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p style="font-size: 1rem; font-family: 'Press Start 2P', cursive; margin-top: 1rem; color: lightblue;">
+        Follow and tap the sequence of boxes as shown.
+    </p>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="script.js"></script>
