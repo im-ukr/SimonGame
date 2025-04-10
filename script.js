@@ -24,9 +24,9 @@ function new_game() {
   len = 0;
   $("h1")[0].innerText = "Game Over!";
   wrong.play();
-  $("#finalScore").text(finalScore); 
-  $("#tryAgainModal").fadeIn(); 
-  game_on = false;
+  $("#finalScore").text(finalScore); // Update the score in the modal
+  $("#tryAgainModal").fadeIn(); // Show the modal
+  game_on = false; // Ensure the game is marked as inactive
 }
 
 function random_audio(flag) {
@@ -42,8 +42,8 @@ function next() {
     level++;
     len = level;
     if (best < level) {
-      $("h1")[1].innerText = "Best Score: " + best;
       best = level;
+      $("h1")[1].innerText = "Best Score: " + best;
     }
     clicked(temp, 300, "new_pressed");
     $("h1")[0].innerText = "Level " + level;
@@ -51,6 +51,7 @@ function next() {
 }
 
 function handleBoxClick(id) {
+  if (!game_on) return; // Ignore clicks if the game is not active
   clicked(id[1], 150, "pressed");
   if (id[1] == seq[count]) {
     if (count == seq.length - 1) {
@@ -64,22 +65,26 @@ function handleBoxClick(id) {
   }
 }
 
-$(".box").on("click touchstart", function (e) {
+// Handle box clicks
+$(".box").on("click", function (e) {
   e.preventDefault();
   handleBoxClick(this.id);
 });
 
-$(document).on("keydown touchstart", function (e) {
+// Start the game on tap or click anywhere on the screen
+$(document).on("click touchstart", function (e) {
   e.preventDefault();
-  if (!game_on) {
+  if (!game_on && $("#tryAgainModal").is(":hidden")) {
     next();
     game_on = true;
     $("h1")[0].innerText = "Level " + level;
   }
 });
 
-$("#tryAgainButton").on("click", function () {
-  $("#tryAgainModal").fadeOut(); 
+// Restart the game when the "Try Again" button is clicked
+$("#tryAgainButton").on("click", function (e) {
+  e.preventDefault();
+  $("#tryAgainModal").fadeOut(); // Hide the modal
   if (!game_on) {
     next();
     game_on = true;
