@@ -64,12 +64,14 @@ function handleBoxClick(id) {
   }
 }
 
-$(".box").on("click touchstart", function (e) {
+$(".box").on("click", function (e) {
   e.preventDefault();
-  handleBoxClick(this.id);
+  if (game_on) {
+    handleBoxClick(this.id);
+  }
 });
 
-$(document).on("keydown touchstart", function (e) {
+$(document).on("keydown", function (e) {
   e.preventDefault();
   if (!game_on) {
     next();
@@ -78,7 +80,8 @@ $(document).on("keydown touchstart", function (e) {
   }
 });
 
-$("#tryAgainButton").on("click", function () {
+$("#tryAgainButton").on("click", function (e) {
+  e.preventDefault();
   $("#tryAgainModal").fadeOut(); 
   if (!game_on) {
     next();
