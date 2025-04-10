@@ -26,7 +26,7 @@ function new_game() {
   wrong.play();
   $("#finalScore").text(finalScore); 
   $("#tryAgainModal").fadeIn(); 
-  game_on = false;
+  game_on = false; 
 }
 
 function random_audio(flag) {
@@ -73,7 +73,7 @@ $(".box").on("click", function (e) {
 
 $(document).on("keydown", function (e) {
   e.preventDefault();
-  if (!game_on) {
+  if (!game_on && $("#tryAgainModal").is(":hidden")) {
     next();
     game_on = true;
     $("h1")[0].innerText = "Level " + level;
@@ -82,7 +82,7 @@ $(document).on("keydown", function (e) {
 
 $("#tryAgainButton").on("click", function (e) {
   e.preventDefault();
-  $("#tryAgainModal").fadeOut(); 
+  $("#tryAgainModal").fadeOut();
   if (!game_on) {
     next();
     game_on = true;
