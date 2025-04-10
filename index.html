@@ -48,9 +48,23 @@
         </div>
     </div>
 
-    <p style="font-size: 1rem; font-family: 'Press Start 2P', cursive; margin-top: 1rem; color: lightblue;">
-        Follow and tap the sequence of boxes as shown.
-    </p>
+    <div id="howToPlayModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: #0A2647; color: lightblue; font-family: 'Press Start 2P', cursive;">
+                <div class="modal-header">
+                    <h5 class="modal-title">How to Play</h5>
+                    <button id="closeHowToPlay" class="btn btn-danger" style="font-family: 'Press Start 2P', cursive;">Close</button>
+                </div>
+                <div class="modal-body">
+                    <p style="font-size: 1rem; font-family: 'Press Start 2P', cursive; color: lightblue;">
+                        Follow and tap the sequence of boxes as shown.<br><br> For example, at level 0 tap 1 box. At level 1, tap the boxes shown in level 0 as well as level 1 (remember the sequence!), the sequence increases as you progress.<br><br> Check till which level your Memory serves you well. <br>All the best!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="howToPlayButton" class="btn btn-info" style="font-family: 'Press Start 2P', cursive; margin-top: 1rem;">How to Play</button>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="script.js"></script>
