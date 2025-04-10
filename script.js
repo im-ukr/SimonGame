@@ -22,10 +22,11 @@ function new_game() {
   level = 0;
   count = 0;
   len = 0;
-  $("h1")[0].innerText = "Game Over! Your score was " + finalScore;
+  $("h1")[0].innerText = "Game Over!";
   wrong.play();
+  $("#finalScore").text(finalScore); 
+  $("#tryAgainModal").fadeIn(); 
   game_on = false;
-  $("#tryAgain").show();
 }
 
 function random_audio(flag) {
@@ -77,12 +78,11 @@ $(document).on("keydown touchstart", function (e) {
   }
 });
 
-$("#tryAgain").on("click touchstart", function (e) {
-  e.preventDefault();
+$("#tryAgainButton").on("click", function () {
+  $("#tryAgainModal").fadeOut(); 
   if (!game_on) {
     next();
     game_on = true;
     $("h1")[0].innerText = "Level " + level;
-    $(this).hide();
   }
 });
