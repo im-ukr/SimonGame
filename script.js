@@ -22,11 +22,10 @@ function new_game() {
   level = 0;
   count = 0;
   len = 0;
-  $("h1")[0].innerText = "Game Over!";
+  $("h1")[0].innerText = "Game Over! Your score was " + finalScore;
   wrong.play();
-  $("#finalScore").text(finalScore); 
-  $("#tryAgainModal").fadeIn(); 
-  game_on = false; 
+  game_on = false;
+  $("#tryAgain").show();
 }
 
 function random_audio(flag) {
@@ -64,28 +63,26 @@ function handleBoxClick(id) {
   }
 }
 
-$(".box").on("click", function (e) {
+$(".box").on("click touchstart", function (e) {
   e.preventDefault();
-  if (game_on) {
-    handleBoxClick(this.id);
-  }
+  handleBoxClick(this.id);
 });
 
-$(document).on("keydown", function (e) {
+$(document).on("keydown touchstart", function (e) {
   e.preventDefault();
-  if (!game_on && $("#tryAgainModal").is(":hidden")) {
-    next();
-    game_on = true;
-    $("h1")[0].innerText = "Level " + level;
-  }
-});
-
-$("#tryAgainButton").on("click", function (e) {
-  e.preventDefault();
-  $("#tryAgainModal").fadeOut();
   if (!game_on) {
     next();
     game_on = true;
     $("h1")[0].innerText = "Level " + level;
+  }
+});
+
+$("#tryAgain").on("click touchstart", function (e) {
+  e.preventDefault();
+  if (!game_on) {
+    next();
+    game_on = true;
+    $("h1")[0].innerText = "Level " + level;
+    $(this).hide();
   }
 });
