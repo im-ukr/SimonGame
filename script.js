@@ -21,7 +21,7 @@ function new_game() {
   level = 0;
   count = 0;
   len = 0;
-  $("h1")[0].innerText = "Game Over, press any key";
+  $("h1")[0].innerText = "Game Over, press any key or tap anywhere";
   wrong.play();
   game_on = false;
 }
@@ -61,13 +61,20 @@ function handleBoxClick(id) {
   }
 }
 
-$(".box").on("click touchstart", function () {
+// Handle both click and touchstart
+$(".box").on("click touchstart", function (e) {
+  e.preventDefault();
   handleBoxClick(this.id);
 });
 
-$(document).on("keydown touchstart", function () {
+// Start game on keydown or tap anywhere
+$(document).on("keydown touchstart", function (e) {
+  // Prevent default to avoid scrolling on mobile
+  e.preventDefault();
   if (!game_on) {
     next();
     game_on = true;
+    // Update prompt to show the current level
+    $("h1")[0].innerText = "Level " + level;
   }
 });
