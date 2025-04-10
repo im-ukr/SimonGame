@@ -24,9 +24,9 @@ function new_game() {
   len = 0;
   $("h1")[0].innerText = "Game Over!";
   wrong.play();
-  $("#finalScore").text(finalScore); // Update the score in the modal
-  $("#tryAgainModal").fadeIn(); // Show the modal
-  game_on = false; // Ensure the game is marked as inactive
+  $("#finalScore").text(finalScore); 
+  $("#tryAgainModal").fadeIn(); 
+  game_on = false;
 }
 
 function random_audio(flag) {
@@ -64,28 +64,22 @@ function handleBoxClick(id) {
   }
 }
 
-// Handle box clicks
-$(".box").on("click", function (e) {
+$(".box").on("click touchstart", function (e) {
   e.preventDefault();
-  if (game_on) {
-    handleBoxClick(this.id);
-  }
+  handleBoxClick(this.id);
 });
 
-// Start the game on key press (desktop) or touch (mobile)
-$(document).on("keydown", function (e) {
+$(document).on("keydown touchstart", function (e) {
   e.preventDefault();
-  if (!game_on && $("#tryAgainModal").is(":hidden")) {
+  if (!game_on) {
     next();
     game_on = true;
     $("h1")[0].innerText = "Level " + level;
   }
 });
 
-// Restart the game when the "Try Again" button is clicked
-$("#tryAgainButton").on("click", function (e) {
-  e.preventDefault();
-  $("#tryAgainModal").fadeOut(); // Hide the modal
+$("#tryAgainButton").on("click", function () {
+  $("#tryAgainModal").fadeOut(); 
   if (!game_on) {
     next();
     game_on = true;
